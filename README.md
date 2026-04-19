@@ -2,6 +2,12 @@
 
 This project implements the Lila backend assignment as a server-authoritative multiplayer Tic-Tac-Toe game on Nakama.
 
+## 🌐 Live Deployment
+
+- 🔗 Frontend (Netlify): https://lila-tictactoe-frontend.netlify.app
+- ⚙️ Backend (Nakama on Render): https://lila-nakama-backend.onrender.com
+- 💻 Source Code: https://github.com/faraz3336/lila-tictactoe
+
 ## What is included
 
 - Server-authoritative Tic-Tac-Toe logic in [`data/modules/match.js`](/C:/nakama-server/data/modules/match.js)
