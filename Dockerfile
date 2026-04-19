@@ -5,4 +5,4 @@ COPY deploy/start-nakama.sh /nakama/start-nakama.sh
 
 RUN chmod +x /nakama/start-nakama.sh
 
-CMD ["/nakama/start-nakama.sh"]
+ENTRYPOINT ["/nakama/start-nakama.sh"]

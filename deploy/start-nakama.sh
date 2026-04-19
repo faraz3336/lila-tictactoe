@@ -26,11 +26,11 @@ NAKAMA_DB_ADDRESS="${DB_CREDENTIALS}@${DB_HOST_PORT}/${DB_NAME}"
 : "${NAKAMA_CONSOLE_PASSWORD:=password}"
 : "${NAKAMA_CONSOLE_SIGNING_KEY:=replace-me-console-signing-key}"
 
-/nakama/nakama migrate up --database.address "${NAKAMA_DB_ADDRESS}"
+/nakama/nakama migrate up --database.address "${NAKAMA_DB_ADDRESS}?sslmode=require"
 
 exec /nakama/nakama \
   --name nakama1 \
-  --database.address "${NAKAMA_DB_ADDRESS}" \
+  --database.address "${NAKAMA_DB_ADDRESS}?sslmode=require" \
   --runtime.path=/nakama/data/modules \
   --runtime.js_entrypoint=match.js \
   --logger.level INFO \
