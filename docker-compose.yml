@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: nakama
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+
+  nakama:
+    image: heroiclabs/nakama:3.20.0
+    depends_on:
+      - postgres
+    volumes:
+      - ./data/modules:/nakama/data/modules
+    ports:
+      - "7350:7350"
+      - "7351:7351"
+    entrypoint:
+      - "/bin/sh"
+      - "-ecx"
+      - |
+        echo "Waiting for Postgres...";
+        sleep 5;
+        /nakama/nakama migrate up --database.address postgres:postgres@postgres:5432/nakama &&
+        exec /nakama/nakama \
+          --name nakama1 \
+          --database.address postgres:postgres@postgres:5432/nakama \
+          --runtime.path=/nakama/data/modules \
+          --runtime.js_entrypoint=match.js \
+          --logger.level DEBUG

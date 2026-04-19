@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nakama Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Server-authoritative multiplayer demo</p>
+          <h1>Tic-Tac-Toe on Nakama</h1>
+          <p class="hero-copy">
+            Create public rooms, join discovered matches, or use automatic matchmaking.
+            Every move is validated on the server before it reaches the board.
+          </p>
+        </div>
+        <div class="hero-card">
+          <div class="status-pill" id="connection-status">Offline</div>
+          <p class="mini-label">Signed in player</p>
+          <p class="hero-value" id="player-display">Not connected</p>
+          <p class="mini-label">Active room</p>
+          <p class="hero-value" id="room-display">None</p>
+        </div>
+      </section>
+
+      <section class="panel controls-panel">
+        <div class="panel-header">
+          <h2>Connection</h2>
+          <p>Use the defaults for local Docker, or point the web app at a deployed Nakama server.</p>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            <span>Display name</span>
+            <input id="display-name" type="text" maxlength="24" placeholder="Player name" />
+          </label>
+          <label>
+            <span>Host</span>
+            <input id="server-host" type="text" placeholder="127.0.0.1" />
+          </label>
+          <label>
+            <span>Port</span>
+            <input id="server-port" type="number" min="1" max="65535" placeholder="7350" />
+          </label>
+          <label class="toggle">
+            <span>Use SSL</span>
+            <input id="server-ssl" type="checkbox" />
+          </label>
+        </div>
+
+        <div class="action-row">
+          <button id="login-button" class="primary">Login</button>
+          <button id="refresh-button">Refresh Rooms</button>
+          <button id="leave-button" class="ghost">Leave Match</button>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <section class="panel game-panel">
+          <div class="panel-header">
+            <h2>Match</h2>
+            <p id="match-summary">Login to start playing.</p>
+          </div>
+
+          <div class="scoreboard">
+            <article class="player-card" id="player-x-card">
+              <p class="mini-label">Player X</p>
+              <h3 id="player-x-name">Waiting...</h3>
+              <p id="player-x-status">Open seat</p>
+            </article>
+            <article class="player-card" id="player-o-card">
+              <p class="mini-label">Player O</p>
+              <h3 id="player-o-name">Waiting...</h3>
+              <p id="player-o-status">Open seat</p>
+            </article>
+          </div>
+
+          <div class="board-shell">
+            <div class="board" id="board"></div>
+          </div>
+
+          <div class="match-actions">
+            <button id="auto-match-button" class="primary">Auto Match</button>
+            <button id="create-room-button">Create Room</button>
+            <button id="rematch-button">Request Rematch</button>
+          </div>
+
+          <div class="start-banner" id="start-banner" hidden>
+            Match started. Both players are connected.
+          </div>
+
+          <p class="info-banner" id="info-banner">
+            Server validation is active. Invalid turns are rejected by the match handler.
+          </p>
+        </section>
+
+        <section class="panel rooms-panel">
+          <div class="panel-header">
+            <h2>Public Rooms</h2>
+            <p>Discover authoritative matches and join open seats in real time.</p>
+          </div>
+
+          <label>
+            <span>Room name</span>
+            <input id="room-name" type="text" maxlength="48" placeholder="Friday duel room" />
+          </label>
+
+          <div class="rooms-list" id="rooms-list">
+            <p class="empty-state">No rooms loaded yet.</p>
+          </div>
+        </section>
+      </section>
+
+      <section class="panel log-panel">
+        <div class="panel-header">
+          <h2>Activity</h2>
+          <p>Connection, matchmaking, join, and match-state events appear here.</p>
+        </div>
+        <div class="activity-log" id="activity-log"></div>
+      </section>
+    </main>
+
+    <script src="./app-config.js"></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
